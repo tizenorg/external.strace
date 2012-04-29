@@ -1,22 +1,26 @@
 Name:       strace
-Summary:    A system call tracer
+Summary:    Tracks and displays system calls associated with a running process
 Version:    4.5.20
 Release:    1
-Group:      utils
-License:    BSD3c
+Group:      Development/Debuggers
+License:    BSD
 URL:        http://sourceforge.net/projects/strace/
-Source0:    strace-4.5.20.tar.gz
+Source0:    %{name}-%{version}.tar.gz
+#Patch0:     strace-4.6-gem-ioctls.patch
+
 
 %description
-A system call tracer
- strace is a system call tracer, i.e. a debugging tool which prints out
- a trace of all the system calls made by a another process/program.
- The program to be traced need not be recompiled for this, so you can
- use it on binaries for which you don't have source.
- .
- System calls and signals are events that happen at the user/kernel
- interface. A close examination of this boundary is very useful for bug
- isolation, sanity checking and attempting to capture race conditions..
+The strace program intercepts and records the system calls called and
+received by a running process.  Strace can print a record of each
+system call, its arguments and its return value.  Strace is useful for
+diagnosing problems and debugging, as well as for instructional
+purposes.
+
+Install strace if you need a tool to track the system calls made and
+received by a process.
+
+
+
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -24,7 +28,7 @@ A system call tracer
 
 %build
 
-%configure --disable-static
+%reconfigure --disable-static
 make %{?jobs:-j%jobs}
 
 %install
@@ -32,8 +36,16 @@ rm -rf %{buildroot}
 %make_install
 
 
+
+
+
+
+
 %files
 %defattr(-,root,root,-)
+%doc COPYRIGHT ChangeLog README CREDITS PORTING NEWS
 %{_bindir}/strace
 %{_bindir}/strace-graph
-%{_datadir}/man/man1/strace.1.gz
+%{_mandir}/man1/*
+
+
