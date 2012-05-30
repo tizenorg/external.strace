@@ -6,6 +6,7 @@ Group:      Development/Debuggers
 License:    BSD
 URL:        http://sourceforge.net/projects/strace/
 Source0:    %{name}-%{version}.tar.gz
+Source1001: packaging/strace.manifest 
 #Patch0:     strace-4.6-gem-ioctls.patch
 
 
@@ -27,6 +28,7 @@ received by a process.
 
 
 %build
+cp %{SOURCE1001} .
 
 %reconfigure --disable-static
 make %{?jobs:-j%jobs}
@@ -42,6 +44,7 @@ rm -rf %{buildroot}
 
 
 %files
+%manifest strace.manifest
 %defattr(-,root,root,-)
 %doc COPYRIGHT ChangeLog README CREDITS PORTING NEWS
 %{_bindir}/strace
