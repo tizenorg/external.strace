@@ -1,26 +1,23 @@
+#sbs-git:slp/pkgs/s/strace strace 4.5.20 c85d16265104f1b4b4e0793e61d1f3bb4605f5a6
 Name:       strace
-Summary:    Tracks and displays system calls associated with a running process
-Version:    4.5.20
+Summary:    A system call tracer
+Version: 4.5.20
 Release:    1
-Group:      Development/Debuggers
-License:    BSD
+Group:      utils
+License:    BSD3c
 URL:        http://sourceforge.net/projects/strace/
-Source0:    %{name}-%{version}.tar.gz
-#Patch0:     strace-4.6-gem-ioctls.patch
-
+Source0:    strace-4.5.20.tar.gz
 
 %description
-The strace program intercepts and records the system calls called and
-received by a running process.  Strace can print a record of each
-system call, its arguments and its return value.  Strace is useful for
-diagnosing problems and debugging, as well as for instructional
-purposes.
-
-Install strace if you need a tool to track the system calls made and
-received by a process.
-
-
-
+A system call tracer
+ strace is a system call tracer, i.e. a debugging tool which prints out
+ a trace of all the system calls made by a another process/program.
+ The program to be traced need not be recompiled for this, so you can
+ use it on binaries for which you don't have source.
+ .
+ System calls and signals are events that happen at the user/kernel
+ interface. A close examination of this boundary is very useful for bug
+ isolation, sanity checking and attempting to capture race conditions..
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -28,7 +25,7 @@ received by a process.
 
 %build
 
-%reconfigure --disable-static
+%configure --disable-static
 make %{?jobs:-j%jobs}
 
 %install
@@ -36,16 +33,6 @@ rm -rf %{buildroot}
 %make_install
 
 
-
-
-
-
-
 %files
 %defattr(-,root,root,-)
-%doc COPYRIGHT ChangeLog README CREDITS PORTING NEWS
 %{_bindir}/strace
-%{_bindir}/strace-graph
-%{_mandir}/man1/*
-
-
