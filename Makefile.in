@@ -101,7 +101,7 @@ SOURCES = $(strace_SOURCES)
 DIST_SOURCES = $(strace_SOURCES)
 man1dir = $(mandir)/man1
 NROFF = nroff
-MANS = $(man_MANS)
+#MANS = $(man_MANS)
 HEADERS = $(noinst_HEADERS)
 ETAGS = etags
 CTAGS = ctags
@@ -215,8 +215,8 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-man_MANS = strace.1
-bin_SCRIPTS = strace-graph
+#man_MANS = strace.1
+#bin_SCRIPTS = strace-graph
 
 # OS is one of `linux', `sunos4', `svr4', or `freebsd'.
 OS = @opsys@
