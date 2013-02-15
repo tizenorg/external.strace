@@ -1,8 +1,8 @@
 # Automake input for strace.
 
 bin_PROGRAMS = strace
-man_MANS = strace.1
-bin_SCRIPTS = strace-graph
+#man_MANS = strace.1
+#bin_SCRIPTS = strace-graph
 
 # OS is one of `linux', `sunos4', `svr4', or `freebsd'.
 OS		= @opsys@

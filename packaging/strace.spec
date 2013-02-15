@@ -1,11 +1,13 @@
+#sbs-git:slp/pkgs/s/strace strace 4.5.20 c85d16265104f1b4b4e0793e61d1f3bb4605f5a6
 Name:       strace
 Summary:    A system call tracer
-Version:    4.5.20
-Release:    1
+Version: 4.5.20
+Release:    3
 Group:      utils
 License:    BSD3c
 URL:        http://sourceforge.net/projects/strace/
 Source0:    strace-4.5.20.tar.gz
+Source1001:     %{name}.manifest
 
 %description
 A system call tracer
@@ -23,7 +25,7 @@ A system call tracer
 
 
 %build
-
+cp %{SOURCE1001} .
 %configure --disable-static
 make %{?jobs:-j%jobs}
 
@@ -31,9 +33,18 @@ make %{?jobs:-j%jobs}
 rm -rf %{buildroot}
 %make_install
 
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/license
+for keyword in LICENSE COPYING COPYRIGHT;
+do
+	for file in `find %{_builddir} -name $keyword`;
+	do
+		cat $file >> $RPM_BUILD_ROOT%{_datadir}/license/%{name};
+		echo "";
+	done;
+done
 
 %files
+%manifest %{name}.manifest
 %defattr(-,root,root,-)
+%{_datadir}/license/%{name}
 %{_bindir}/strace
-%{_bindir}/strace-graph
-%{_datadir}/man/man1/strace.1.gz
