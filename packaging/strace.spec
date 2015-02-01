@@ -43,13 +43,8 @@ do
 	done;
 done
 
-# license
-mkdir -p %{buildroot}/usr/share/license
-cp COPYRIGHT %{buildroot}/usr/share/license/%{name}
-
 %files
 %manifest %{name}.manifest
 %defattr(-,root,root,-)
 %{_datadir}/license/%{name}
 %{_bindir}/strace
-/usr/share/license/%{name}
